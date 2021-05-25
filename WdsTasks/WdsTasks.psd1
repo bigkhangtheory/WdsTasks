@@ -95,7 +95,7 @@
         PSData = @{
 
             # Tags applied to this module. These help with module discovery in online galleries.
-            # Tags = @()
+            Tags                       = @('powershell', 'desired state configuration', 'dsc', 'composite resource', 'configuration', 'windows server', 'deployment services', 'wds', 'mdt')
 
             # A URL to the license for this module.
             # LicenseUri = ''
@@ -104,7 +104,7 @@
             ProjectUri                 = 'https://prod1gitlab.mapcom.local/dsc/configurations/WdsTasks.git'
 
             # A URL to an icon representing this module.
-            # IconUri = ''
+            IconUri                    = 'https://dsccommunity.org/images/DSC_Logo_300p.png'
 
             # ReleaseNotes of this module
             # ReleaseNotes = ''
@@ -113,7 +113,7 @@
             # Prerelease = ''
 
             # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-            RequireLicenseAcceptance = $false
+            RequireLicenseAcceptance   = $false
 
             # External dependent modules of this module
             ExternalModuleDependencies = 'PSDesiredStateConfiguration'
