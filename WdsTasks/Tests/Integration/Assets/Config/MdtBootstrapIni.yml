@@ -1,0 +1,69 @@
+
+Path: D:\DeploymentShare\Control\Bootstrap.ini
+Ensure: Present
+Content: |4
+    [Settings]
+    Priority=DefaultGateway, Default
+
+    [DefaultGateway]
+    10.101.1.1=WindowsVlan
+
+    172.16.16.1=CHES
+
+    172.18.28.129=CA1
+    172.18.28.193=CA1
+
+    10.200.17.1=TN2
+    10.200.18.1=TN2
+
+    172.18.2.129=TX1
+    172.18.2.193=TX1
+
+    172.18.16.129=TX5
+    172.18.16.193=TX5
+
+    10.200.33.1=WA1
+    10.200.34.1=WA1
+
+
+    [WindowsVlan]
+    DeployRoot=\\CHE-APP-DUP01.mapcom.local\DeploymentShare$
+
+    [CHES]
+    DeployRoot=\\CHE-APP-DUP01.mapcom.local\DeploymentShare$
+
+    [CA1]
+    DeployRoot=\\CA1-APP-SRV01.mapcom.local\DeploymentShare$
+
+    [TN2]
+    DeployRoot=\\TN2-DHCP-SRV01.mapcom.local\DeploymentShare$
+
+    [TX1]
+    DeployRoot=\\MAPAPP-TX-01.mapcom.local\DeploymentShare$
+
+    [TX5]
+    DeployRoot=\\MAPAPP-TX-05.mapcom.local\DeploymentShare$
+
+    [WA1]
+    DeployRoot=\\WA1-DHCP-SRV01.mapcom.local\DeploymentShare$
+
+    [Default]
+    ; Keyboard locale to be used with the target operating system.
+    KeyboardLocale=0409:00000409;1809:00001809;041A:0000041A;083b:0001083b
+
+    ; The name of the keyboard locale to be used while in Windows PE only.
+    KeyboardLocalePE=0409:00000409
+
+    ; Indicates whether the Welcome to Windows Deployment wizard page is skipped.
+    SkipBDDWelcome=YES
+    ; The domain in which a user’s credentials (specified in UserID) exist.
+    UserDomain=mapcom.local
+
+    ; The user credentials for accessing network resources.
+    UserID=wdsaccess
+
+    ; User locale to be used with the target operating system.
+    UserLocale=en-us
+
+    ; The password for user credentials specified in UserID.
+    UserPassword=d0ntbre@k!t

@@ -1,0 +1,333 @@
+Path: D:\DeploymentShare\Control\CustomSettings.ini
+Ensure: Present
+Content: |4
+    [Settings]
+    Priority=DefaultGateway, Default
+    Properties=MyCustomProperty
+
+    ; define default gateway definitions for PXE client requests
+    ; assign clients to Site Code based on client gateway
+    [DefaultGateway]
+    10.101.1.1=WindowsVlan
+
+    172.16.16.1=CHES
+
+    172.18.28.129=CA1
+    172.18.28.193=CA1
+
+    10.200.17.1=TN2
+    10.200.18.1=TN2
+
+    172.18.2.129=TX1
+    172.18.2.193=TX1
+
+    172.18.16.129=TX5
+    172.18.16.193=TX5
+
+    10.200.33.1=WA1
+    10.200.34.1=WA1
+
+    [WindowsVlan]
+    TaskSequenceID=005
+
+    ; this defines the ini values for clients at CHES site
+    [CHES]
+    OSDComputerName=CHEPC-%SerialNumber%
+    TimeZoneName=Eastern Standard Time
+    WDSServer=DC2-WDS-SRV01
+    TaskSequenceID=TS008
+
+    ; this defines the MDT ini values for clients at CA1 site
+    [CA1]
+    OSDComputerName=CA1PC-%SerialNumber%
+    TimeZoneName=Pacific Standard Time
+    WDSServer=CA1-APP-SRV01
+    TaskSequenceID=TS008
+
+    ; this defines the MDT ini values for clients at TN2 site
+    [TN2]
+    OSDComputerName=TN2PC-%SerialNumber%
+    TimeZoneName=Central Standard Time
+    WDSServer=TN2-DHCP-SRV01
+    TaskSequenceID=TS008
+
+    ; this defines the MDT ini values for clients at TX1 site
+    [TX1]
+    OSDComputerName=TX1PC-%SerialNumber%
+    TimeZoneName=Central Standard Time
+    WDSServer=MAPAPP-TX-01
+    TaskSequenceID=TS008
+
+    ; this defines the MDT ini values for clients at TX5 site
+    [TX5]
+    OSDComputerName=TX5PC-%SerialNumber%
+    TimeZoneName=Central Standard Time
+    WDSServer=MAPAPP-TX-05
+    TaskSequenceID=TS008
+
+    ; this defines the MDT ini values for clients at WA1 site
+    [WA1]
+    OSDComputerName=WA1PC-%SerialNumber%
+    TimeZoneName=Pacific Standard Time
+    WDSServer=WA1-DHCP-SRV01
+    TaskSequenceID=TS008
+
+
+    [Default]
+    ; Customizes the Task Sequencer engine's display banner
+    _SMSTSORGNAME=MAP Communications
+
+    ; Indicates whether the target computer is authorized to have the target operating system installed.
+    OSInstall=YES
+
+    ; This property is used to determine whether the Apply Local GPO Package task sequence step is performed.
+    ApplyGPOPack=NO
+
+    ; This property configures whether BitLocker PINs contain alphanumeric values.
+    ;BDEAllowAlphaNumericPin=YES
+
+    ; The drive letter for the partition that is not encrypted by BitLocker™ Drive Encryption, also known as the system volume.
+    ; The system volume is the volume that contains the hardware-specific files needed to load Windows computers after the basic input/output system (BIOS) has booted the platform.
+    ;BDEDriveLetter=S:
+
+    ; The size of the partition that is encrypted by BitLocker Drive Encryption, also known as the operating system volume.
+    ; The value is specified in megabytes (MB).
+    ;BDEDriveSize=2000
+
+    ; The type of BitLocker Drive Encryption installation to be performed.
+    ; TPM ::> Protect the computer with TPM only. The TPM is a microcontroller that stores keys, passwords, and digital certificates.
+    ; TPMKey ::> Protect the computer with TPM and a PIN. The PIN can be 4 to 20 digits long. A user must type in the PIN each time the computer restarts.
+    ; TPMPin ::> Protect the computer with TPM and a startup key. Use this option to create a startup key and to save it on a USB flash drive. The startup key must be present in the port each time the computer restarts.
+    ; Key ::> Protect the computer with an external key (the recovery key) that can be stored in a folder, in AD DS, or printed.
+    ;BDEInstall=PKey
+
+    ; The location for storing the recovery key and startup key.
+    ;BDEKeyLocation=
+
+    ; The PIN to be assigned to the target computer for use in BitLocker Drive Encryption when the BDEInstall property is set to ProtectKeyWithTpmAndPin.
+    ;BDEPin=
+
+    ; A Boolean value that indicates whether the process creates a recovery key for BitLocker.
+    ; AD ::> A recovery key is created.
+    ; Not Specified ::> A recovery key is not created.
+    ;BDERecoveryKey=
+
+    ; Specifies that the deployment process should not proceed until BitLocker has completed the encryption process for all specified drives.
+    ; Specifying TRUE could dramatically increase the time required to complete the deployment process.
+    ;BDEWaitForEncryption=FALSE
+
+    ; A setting for displaying colors on the target computer. The property can contain numeric digits and corresponds to the color quality setting.
+    ;BitsPerPel=32
+
+    ; Control of whether the group membership of local groups on the target computers is captured.
+    ; This group membership is captured during the State Capture Phase and is restored during the State Restore Phase.
+    ;CaptureGroups=YES
+
+    ; The property that specifies the database to be used for querying property values from columns in the table specified in the Table property.
+    ; The database resides on the computer specified in the SQLServer property.
+    ; The instance of Microsoft SQL Server® on the computer is specified in the Instance property.
+    ;Database=
+
+    ; Specifies the fully qualified, non-UNC path to a directory on a fixed disk of the target computer that contains the domain database.
+    ;DatabasePath=
+
+    ; Specifies the user account used to connect to the computer running SQL Server (specified by the SQLServer property) using SQL Server authentication.
+    ;DBID=
+
+    ; Specifies the password for the user account specified in the DBID property.
+    ;DBPwd=
+    
+    ; The type of deployment being performed based on the deployment scenario.
+    ; NEWCOMPUTER ::> The target computer is a new computer that has never been a member of the network.
+    ; REFRESH ::> The target computer is an existing computer on the network that needs the desktop environment standard to be redeployed.
+    ; REPLACE ::> An existing computer on the network is being replaced with a new computer. The user state migration data is transferred from the existing computer to a new computer.
+    DeploymentType=NEWCOMPUTER
+
+    ; This property controls a user's ability to start Task Manager by pressing CTRL+ALT+DEL.
+    ; After the user starts Task Manager, they could interrupt the LTI task sequence while running in the new operating system on the target computer.
+    DisableTaskMgr=YES
+
+    ; Indicator of whether an image of the target computer is to be captured.
+    DoCapture=NO
+
+    ; The user account credentials used to join the target computer to the domain specified in JoinDomain.
+    ; Specify as UserName 
+    DomainAdmin=svc_mdt
+
+    ; The domain in which the user’s credentials specified in DomainAdmin reside.
+    DomainAdminDomain=MAPCOM
+
+    ; The EventService property specifies the URL where the MDT monitoring service is running.
+    EventService=http://dc2-wds-srv01.mapcom.local:9800
+
+    ; Specifies the action to be taken when an LTI task sequence finishes, which is after the Summary wizard page in the Deployment Wizard.
+    FinishAction=REBOOT
+
+    ; This property controls the display of Windows Explorer while the LTI task sequence is running in the new operating system on the target computer.
+    HideShell=YES
+
+    ; The URL to be used as the Windows Internet Explorer® home page after the target operating system is deployed.
+    ;Home_Page=https://mapcommunications.com
+
+    ; A list of input locales to be used with the target operating system.
+    InputLocale=0409:00000409;0413:00020409;0413:00000409;0409:00020409
+
+    ; The instance of SQL Server used for querying property values from columns in the table specified in the Table property.
+    ;Instance=
+    
+    ; The domain that the target computer joins after the target operating system is deployed.
+    JoinDomain=mapcom.local
+
+    ; Keyboard locale to be used with the target operating system.
+    KeyboardLocale=0409:00000409;1809:00001809;041A:0000041A;083b:0001083b
+
+    ; The name of the keyboard locale to be used while in Windows PE only.
+    KeyboardLocalePE=0409:00000409
+
+    ; The arguments passed to the USMT Loadstate process. The ZTI script inserts the appropriate logging, progress, and state store parameters.
+    ; If this value is not included in the settings file, the user state restore process is skipped.
+    ; /v    ::> Enables verbose output in the LoadState log. The default is 0. You can specify any number from 0 to 15. The value 5 enables verbose and status output.
+    ; /c    ::> When specified, LoadState will continue to run even if there are nonfatal errors. Without the /c option, LoadState exits on the first error.
+    ; /lac  ::> Specifies that if the account being migrated is a local (non-domain) account, and it does not exist on the destination computer, then USMT will create the account but it will be disabled.
+    ;LoadStateArgs=/v:5 /c /lac
+
+    ; The Active Directory OU in the target domain where the computer account for the target computer is created.
+    ;MachineObjectOU=Computers
+
+    ; The name of the organization that owns the target computer.
+    OrgName=MAP Communications
+
+    ; This property specifies if the LiteTouchPE.wim file, which includes Windows RE and optionally DaRT, is applied to the system drive as the recovery partition.
+    ;PrepareWinRE=YES
+
+    ; Arguments passed to the USMT Scanstate process. The scripts call Scanstate.exe, and then insert the appropriate logging, progress, and state store parameters.
+    ; If this value is not included in the settings file, the user state backup process is skipped.
+    ;ScanStateArgs=/v:5 /o /c
+
+    ; Indicates whether the Local Administrators wizard page is skipped.
+    SkipAdminAccounts=YES
+
+    ; Indicator of whether the Administrator Password wizard page is skipped.
+    SkipAdminPassword=YES
+
+    ; Indicator of whether the Select one or more applications to install wizard page is skipped.
+    SkipApplications=YES
+
+    ; Indicator of whether the Welcome to Windows Deployment wizard page is skipped.
+    SkipBDDWelcome=YES
+
+    ; Indicator of whether the Specify the BitLocker configuration. wizard page is skipped.
+    SkipBitLocker=YES
+
+    ; Indicator of whether the Specify the BitLocker recovery details. wizard page is skipped.
+    SkipBitLockerDetails=YES
+
+    ; Indicator of whether the Select an operating system image to install wizard page is skipped.
+    SkipBuild=YES
+
+    ; Indicator of whether the Specify whether to capture an image wizard page is skipped.
+    SkipCapture=YES
+
+    ; Indicator of whether the Specify where to save a complete computer backup wizard page is skipped.
+    SkipComputerBackup=YES
+
+    ; Indicator of whether the Configure the computer name wizard page is skipped.
+    SkipComputerName=YES
+
+    ; Indicator of whether the Join the computer to a domain or workgroup wizard page is skipped.
+    SkipDomainMembership=YES
+
+    ; Indicator of whether the Operating system deployment completed successfully wizard page is skipped.
+    SkipFinalSummary=YES
+
+    ; Indicator of whether the Locale Selection wizard page is displayed.
+    SkipLocaleSelection=YES
+
+    ; Indicator of whether the Packages wizard page is skipped.
+    SkipPackageDisplay=YES
+
+    ; Indicator of whether the Specify the product key needed to install this operating system wizard page is skipped.
+    SkipProductKey=YES
+
+    ; Indicates whether the Roles and Features wizard page is skipped.
+    SkipRoles=YES
+    
+    ; Indicator of whether the Ready to begin wizard page is skipped.
+    SkipSummary=YES
+
+    ; Indicates whether the Select a task sequence to execute on this computer wizard page is skipped.
+    SkipTaskSequence=YES
+
+    ; Indicator of whether the Set the Time Zone wizard page is skipped.
+    SkipTimeZone=YES
+
+    ; Indicator of whether the Specify whether to restore user data and Specify where to save your data and settings wizard pages are skipped.
+    SkipUserData=YES
+
+    ; Indicator of whether the entire Windows Deployment Wizard is to be skipped.
+    SkipWizard=YES
+    
+    ; The network shared folder in which the BDD 2007 script logs are stored.
+    SLShare=\\DC2-WDS-SRV01.mapcom.local\Logs$
+
+    ; The identity of the computer running SQL Server that performs a database query that returns property values from columns in the table specified in the Table property
+    ;SQLServer=
+
+    ; The name of a shared folder on the computer running SQL Server (specified by the SQLServer property).
+    ; The credentials used for authentication are provided by the UserDomain, UserID, and UserPassword properties (for LTI and ZTI)
+    ;SQLShare=
+
+    ; This property is used to set the path where the user state migration data will be stored, which can be a UNC path, a local path, or a relative path.
+    ;StatePath=
+
+    ; The TPM password (also known as the TPM administration password) for the owner of the target computer. The password can be saved to a file or stored in AD DS.
+    ;TPMOwnerPassword=
+
+    ; The folder where the user state migration data is stored. This folder exists beneath the network shared folder specified in UDShare.
+    ;UDDir=
+
+    ; The user profiles that need to be saved during the State Capture Phase by ScanState.exe.
+    ;UDProfiles=
+
+    ; The network share where user state migration data is stored.
+    ;UDShare=
+
+    ; The default language to be used with the target operating system.
+    UILanguage=en-us
+
+    ; Location in which USMT stores user state migration data.
+    ; blank ::> For LTI, the location for storing the user state migration data is selected in the Windows Deployment Wizard.
+    ; UNC Path ::> The UNC path to the network shared folder where the user state migration data is stored.
+    ; AUTO ::> The deployment scripts store the user state migration data on a local hard disk if space is available. Otherwise, the user state migration data is saved on a network location which is specified in the UDShare and UDDir properties.
+    ; NETWORK ::> The user state migration data is stored in the location designated by the UDShare and UDDir properties.
+    ; NONE ::> The user state migration data is not saved.
+    ;UserDataLocation=
+
+    ; The domain in which a user’s credentials (specified in UserID) exist.
+    UserDomain=mapcom.local
+
+    ; The user credentials for accessing network resources.
+    UserID=wdsaccess
+
+    ; User locale to be used with the target operating system.
+    UserLocale=en-us
+
+    ; The password for user credentials specified in UserID.
+    UserPassword=d0ntbre@k!t
+
+    ; This property specifies whether the USMT user state information is stored locally on the target computer.
+    ; TRUE ::> The USMT user state information is stored locally on the target computer, and the Request State Store and Release State Store task sequence steps are skipped.
+    ; FALSE ::> The USMT user state information is not stored locally on the target computer, and the Request State Store and Release State Store task sequence steps are performed.
+    USMTLocal=TRUE
+
+    ; The vertical refresh rate for the monitor on the target computer. The vertical refresh rate is specified in Hertz.
+    VRefresh=60
+
+    ; This is the name of the Windows Server Update Services (WSUS) server that the target computer should use when scanning for, downloading, and installing updates.
+    ;WSUSServer=
+
+    ; The horizontal resolution of the monitor on the target computer,  specified in pixels.
+    XResolution=1024
+
+    ; The vertical resolution of the monitor on the target computer, specified in pixels.
+    YResolution=768
