@@ -1,0 +1,10 @@
+PersistentDrive:
+  Name: DS001
+  Path: D:\DeploymentShare
+  Description: MDT Deployment Share
+  ShareName: DeploymentShare$
+  Ensure: Present
+BootImage:
+  Version: '2021.10.02'
+  BackgroundFile: D:\Resources\background.bmp
+  LiteTouchWIMDescription: Lite Touch Windows PE (x64)

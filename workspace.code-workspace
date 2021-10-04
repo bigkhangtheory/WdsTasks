@@ -10,7 +10,6 @@
     "plantuml.exportOutDir": "Docs/Diagrams/out",
     "plantuml.render": "Local",
     "editor.fontFamily": "'CaskaydiaCove NF',Consolas, 'Courier New', monospace",
-    "powershell.codeFormatting.autoCorrectAliases": true,
     "powershell.codeFormatting.preset": "Allman",
     "powershell.codeFormatting.trimWhitespaceAroundPipe": true,
     "powershell.codeFormatting.useCorrectCasing": true,

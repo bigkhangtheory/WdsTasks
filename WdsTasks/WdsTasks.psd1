@@ -12,7 +12,7 @@
     # RootModule = ''
 
     # Version number of this module.
-    ModuleVersion        = '2021.7.0'
+    ModuleVersion        = '2021.10.0'
 
     # Supported PSEditions
     # CompatiblePSEditions = @()
@@ -129,4 +129,3 @@
     # DefaultCommandPrefix = ''
 
 }
-
