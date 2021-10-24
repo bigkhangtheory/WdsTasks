@@ -12,7 +12,7 @@
     # -------------------------------------------------------------------------
     # PowerShell Modules
     # -------------------------------------------------------------------------
-    
+
     BuildHelpers          = 'latest'
     # Helper functions for PowerShell CI/CD scenarios
 
@@ -28,7 +28,7 @@
     DscBuildHelpers       = 'latest'
     # Build Helpers for DSC Resources and Configurations
 
-    InvokeBuild           = '5.8.4'
+    InvokeBuild           = 'latest'
     # Build and test automation in PowerShell
 
     Pester                = '4.10.1'
@@ -58,7 +58,7 @@
 
     cMDTBuildLab          = '2.5.0'
     # A DSC Module to help automize deployment Windows Reference Images on MDT Server
-    
+
     WdsDsc                = '0.11.0'
     # DSC Resources to configure WDS
 

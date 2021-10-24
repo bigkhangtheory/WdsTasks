@@ -3,60 +3,61 @@ configuration Wds
     param
     (
         [Parameter(Mandatory)]
-        [string]
+        [ValidateNotNullOrEmpty()]
+        [System.String]
         $RemInstPath,
 
         [Parameter()]
-        [pscredential]
+        [System.Management.Automation.PSCredential]
         $RunAsUser,
 
         [Parameter()]
         [ValidateSet( 'All', 'Known', 'None')]
-        [string]
+        [System.String]
         $AnswerClients,
 
         [Parameter()]
-        [boolean]
+        [System.Boolean]
         $UseExistingDhcpScope = $false,
-        
+
         [Parameter()]
-        [string]
+        [System.String]
         $ScopeStart,
 
         [Parameter()]
-        [string]
+        [System.String]
         $ScopeEnd,
 
         [Parameter()]
-        [string]
+        [System.String]
         $ScopeId,
 
         [Parameter()]
-        [string]
+        [System.String]
         $SubnetMask,
 
         [Parameter()]
-        [string]
+        [System.String]
         $DomainName,
 
         [Parameter()]
-        [string]
+        [System.String]
         $DefaultDeviceOU,
 
         [Parameter()]
-        [hashtable[]]
+        [System.Collections.Hashtable[]]
         $BootImages,
 
         [Parameter()]
-        [hashtable[]]
+        [System.Collections.Hashtable[]]
         $ImageGroups,
 
         [Parameter()]
-        [hashtable[]]
+        [System.Collections.Hashtable[]]
         $InstallImages,
 
         [Parameter()]
-        [hashtable[]]
+        [System.Collections.Hashtable[]]
         $DeviceReservations
     )
 
@@ -113,7 +114,7 @@ configuration Wds
             GroupName        = 'Administrators'
             Ensure           = 'Present'
             MembersToInclude = $RunAsUser.UserName
-        }        
+        }
     }
 
     WdsInitialize wdsInit
@@ -152,7 +153,7 @@ configuration Wds
                 $matchAnswerClients = $patternAnswerClients.Matches($output)
                 $matchAnswerKnownClients = $patternAnswerKnownClients.Matches($output)
 
-                if ( $null -eq $matchAnswerClients.Groups -or 
+                if ( $null -eq $matchAnswerClients.Groups -or
                     $null -eq $matchAnswerKnownClients.Groups )
                 {
                     Write-Warning 'Output of wdsutil has not the expected content.'
@@ -197,7 +198,7 @@ configuration Wds
             GetScript            = { return @{result = 'N/A' } }
             DependsOn            = $dependsOnWdsService
             PsDscRunAsCredential = $RunAsUser
-        }        
+        }
     }
 
     if ( $null -ne $BootImages )
@@ -220,7 +221,7 @@ configuration Wds
             {
                 TestScript = {
                     $wdsGroup = Get-WdsInstallImageGroup -Name $using:group.Name -ErrorAction SilentlyContinue
-    
+
                     if ( $using:group.Ensure -eq 'Absent' )
                     {
                         if ( $null -eq $wdsGroup -or $wdsGroup.Count -eq 0 )
@@ -235,7 +236,7 @@ configuration Wds
                             if ( [string]::IsNullOrWhiteSpace($using:group.SecurityDescriptor) -or
                                 $wdsGroup.Security -eq $using:group.SecurityDescriptor)
                             {
-                                return $true                            
+                                return $true
                             }
                         }
                     }
@@ -250,28 +251,28 @@ configuration Wds
                     {
                         Remove-WdsInstallImageGroup @params
                     }
-                    else 
+                    else
                     {
                         if ( -not [string]::IsNullOrWhiteSpace($using:group.SecurityDescriptor) )
                         {
-                            $params.SecurityDescriptorSDDL = $using:group.SecurityDescriptor   
+                            $params.SecurityDescriptorSDDL = $using:group.SecurityDescriptor
                         }
 
                         $wdsGroup = Get-WdsInstallImageGroup -Name $using:group.Name -ErrorAction SilentlyContinue
 
                         if ( $null -eq $wdsGroup )
                         {
-                            New-WdsInstallImageGroup @params                            
+                            New-WdsInstallImageGroup @params
                         }
                         else
                         {
-                            Set-WdsInstallImageGroup @params                            
+                            Set-WdsInstallImageGroup @params
                         }
                     }
                 }
                 GetScript  = { return @{result = 'N/A' } }
                 DependsOn  = $dependsOnWdsService
-            }        
+            }
         }
     }
 
@@ -315,7 +316,7 @@ configuration Wds
                     ScopeID          = $ScopeId
                     Ensure           = $devRes.Ensure
                     DependsOn        = $dependsOnClientScope
-                }                
+                }
             }
 
             # use MacAddress as DeviceID if it's not specified
@@ -344,7 +345,7 @@ configuration Wds
                     $devRes.OU = $DefaultDeviceOU
                 }
             }
-            
+
             if ( [string]::IsNullOrWhiteSpace($devRes.User) )
             {
                 # remove JoinRights if no user is specified
@@ -373,4 +374,4 @@ configuration Wds
             (Get-DscSplattedResource -ResourceName WdsDeviceReservation -ExecutionName $executionName -Properties $devRes -NoInvoke).Invoke($devRes)
         }
     }
-}
+} #end configuration
