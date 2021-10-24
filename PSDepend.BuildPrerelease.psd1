@@ -7,7 +7,7 @@
         DependencyType = 'PSGalleryModule'
         Parameters     = @{
             Repository      = 'PSGallery'
-            AllowPreRelease = $true
+            #AllowPreRelease = $true
         }
     }
 

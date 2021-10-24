@@ -52,6 +52,7 @@
     PSDeploy              = 'latest'
     # Module to simplify PowerShell based deployments
 
+    PowerShellGet         = '2.2.5'
     # -------------------------------------------------------------------------
     # DSC Resources
     # -------------------------------------------------------------------------
