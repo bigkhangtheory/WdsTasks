@@ -1,24 +1,29 @@
-function Resolve-Dependency {
+function Resolve-Dependency
+{
     [CmdletBinding()]
     param()
 
-    Write-Host "Downloading dependencies, this may take a while" -ForegroundColor Green
-    if (-not (Get-PackageProvider -Name NuGet -ForceBootstrap)) {
+    Write-Host 'Downloading dependencies, this may take a while' -ForegroundColor Green
+    if (-not (Get-PackageProvider -Name NuGet -ForceBootstrap))
+    {
         $providerBootstrapParams = @{
             Name           = 'nuget'
             Force          = $true
             ForceBootstrap = $true
         }
-        if ($PSBoundParameters.ContainsKey('Verbose')) {
+        if ($PSBoundParameters.ContainsKey('Verbose'))
+        {
             $providerBootstrapParams.Add('Verbose', $Verbose)
         }
-        if ($RepositoryProxy) {
+        if ($RepositoryProxy)
+        {
             $providerBootstrapParams.Add('Proxy', $RepositoryProxy)
         }
         $null = Install-PackageProvider @providerBootstrapParams
     }
 
-    if (-not (Get-Module -Name "$buildModulesPath\PSDepend" -ListAvailable -ErrorAction SilentlyContinue)) {
+    if (-not (Get-Module -Name "$buildModulesPath\PSDepend" -ListAvailable -ErrorAction SilentlyContinue))
+    {
         Write-Verbose -Message 'BootStrapping PSDepend'
         Write-Verbose -Message "Parameter $buildOutput"
         $installPSDependParams = @{
@@ -26,16 +31,20 @@ function Resolve-Dependency {
             Path    = $buildModulesPath
             Confirm = $false
         }
-        if ($PSBoundParameters.ContainsKey('verbose')) {
+        if ($PSBoundParameters.ContainsKey('verbose'))
+        {
             $installPSDependParams.Add('Verbose', $Verbose)
         }
-        if ($Repository) {
+        if ($Repository)
+        {
             $installPSDependParams.Add('Repository', $Repository)
         }
-        if ($RepositoryProxy) {
+        if ($RepositoryProxy)
+        {
             $installPSDependParams.Add('Proxy', $RepositoryProxy)
         }
-        if ($RepositoryCredential) {
+        if ($RepositoryCredential)
+        {
             $installPSDependParams.Add('ProxyCredential', $RepositoryCredential)
         }
         Save-Module @installPSDependParams
@@ -45,17 +54,8 @@ function Resolve-Dependency {
         Force = $true
         Path  = "$ProjectPath\PSDepend.Build.psd1"
     }
-    if ($PSBoundParameters.ContainsKey('Verbose')) {
-        $psDependParams.Add('Verbose', $Verbose)
-    }
-    Import-Module -Name PSDepend
-    Invoke-PSDependInternal -PSDependParameters $psDependParams -Reporitory $Repository
-
-    $psDependParams = @{
-        Force = $true
-        Path  = "$ProjectPath\PSDepend.BuildPrerelease.psd1"
-    }
-    if ($PSBoundParameters.ContainsKey('Verbose')) {
+    if ($PSBoundParameters.ContainsKey('Verbose'))
+    {
         $psDependParams.Add('Verbose', $Verbose)
     }
     Import-Module -Name PSDepend
